@@ -4,6 +4,7 @@
 /Transmission/[Bb]uild/
 /Transmission/[Bb]uilds/
 /Transmission/Assets/AssetStoreTools*
+/Transmission/Assets/Scenes/Personal*
 
 # Visual Studio 2015 cache directory
 /.vs/
