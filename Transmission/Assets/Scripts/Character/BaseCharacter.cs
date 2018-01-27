@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseCharacter : MonoBehaviour {
 
     public int startingHealth;
@@ -18,6 +19,7 @@ public abstract class BaseCharacter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        characterStats = new CharacterStats();
         init();
         initStats(startingHealth, startingSpeed, startingPower, startingDefense);
 	}
@@ -50,7 +52,7 @@ public abstract class BaseCharacter : MonoBehaviour {
         return targetVelocity != Vector2.zero;
     }
 
-    public Vector2 getTargetVel()
+    public Vector2 getTargetVelocity()
     {
         return targetVelocity;
     }
