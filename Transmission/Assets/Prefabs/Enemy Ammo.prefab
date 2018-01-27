@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212851600692743076}
   - component: {fileID: 114902276916340098}
   - component: {fileID: 50698794686239208}
+  - component: {fileID: 70888508221815192}
   m_Layer: 0
   m_Name: Enemy Ammo
   m_TagString: Untagged
@@ -62,6 +63,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &70888508221815192
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1432619990587054}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.055555556, y: 0.14814815}
+  m_Direction: 0
 --- !u!114 &114902276916340098
 MonoBehaviour:
   m_ObjectHideFlags: 1

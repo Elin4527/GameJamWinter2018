@@ -10,7 +10,10 @@ public class AllyDefaultAI : AIBase {
     {
         if(target != null)
         {
-            return (target.transform.position - character.transform.position).normalized * character.getCharacterStats().getSpeed();
+            if (!isPathBlocked(target.transform.position))
+            {
+                return (target.transform.position - character.transform.position).normalized * character.getCharacterStats().getSpeed();
+            }
         }
         return Vector2.zero;
     }
@@ -19,7 +22,7 @@ public class AllyDefaultAI : AIBase {
     {
         if(target == null)
         {
-            target = UnityEngine.Object.FindObjectOfType<EnemyCharacter>().GetComponent<BaseCharacter>();
+            target = UnityEngine.Object.FindObjectOfType<EnemyCharacter>();
         }
         character.setDirection(character.getTargetVelocity());
         return;

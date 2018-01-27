@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212678249236197396}
   - component: {fileID: 114037398384953162}
   - component: {fileID: 50324225747635588}
+  - component: {fileID: 70574308951192886}
   m_Layer: 0
   m_Name: Friendly Ammo
   m_TagString: Untagged
@@ -62,6 +63,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &70574308951192886
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1070335564648218}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.055555556, y: 0.14814815}
+  m_Direction: 0
 --- !u!114 &114037398384953162
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCharacter : BaseCharacter {
-    
+
+    protected override void init()
+    {
+        friendly = false;
+    }
     public override void fixedLogic()
     {
         base.fixedLogic();

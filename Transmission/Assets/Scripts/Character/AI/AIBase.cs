@@ -15,4 +15,12 @@ public abstract class AIBase {
     public abstract void fixedLogicTick();
     public abstract Vector2 frameInput();
     public abstract bool isValid();
+
+    protected bool isPathBlocked(Vector2 dest)
+    {
+        Vector2 target = dest - (Vector2)character.transform.position;
+        RaycastHit2D collision = Physics2D.Raycast(character.transform.position, target.normalized, target.magnitude, LayerMask.GetMask("Wall"));
+        return collision.collider != null;
+    }
+
 }

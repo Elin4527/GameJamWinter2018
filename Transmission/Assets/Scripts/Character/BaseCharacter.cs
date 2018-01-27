@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class BaseCharacter : MonoBehaviour {
 
     public int startingHealth;
-    public int startingSpeed;
+    public float startingSpeed;
     public int startingPower;
     public int startingDefense;
     public AIBase startingAI;
@@ -17,6 +17,8 @@ public abstract class BaseCharacter : MonoBehaviour {
     private Vector2 direction;
 
     private Stack<AIBase> ai;
+
+    protected bool friendly;
 
     protected CharacterStats characterStats;
 
@@ -32,6 +34,11 @@ public abstract class BaseCharacter : MonoBehaviour {
         }
 	}
 
+    public bool isFriendlyUnit()
+    {
+        return friendly;
+    }
+
     public void addAIState(AIBase state)
     {
         state.setCharacter(this);
@@ -46,14 +53,20 @@ public abstract class BaseCharacter : MonoBehaviour {
         ai.Push(state);
     }
 
-    protected void initStats(int health, int speed, int power, int defense)
+    protected void initStats(int health, float speed, int power, int defense)
     {
         characterStats.setMaxHealth(health);
         characterStats.setHealth(health);
         characterStats.setSpeed(speed);
         characterStats.setPower(power);
         characterStats.setDefense(defense);
-    } 
+    }
+
+    public void applyDamage(int damage)
+    {
+        characterStats.modifyHealth(-damage);
+        Debug.Log("Health is " + characterStats.getHealth());
+    }
 
     protected virtual void init()
     { }
@@ -97,17 +110,12 @@ public abstract class BaseCharacter : MonoBehaviour {
 
     public void setDirection(Vector2 d)
     {
-        direction = d.normalized;
         transform.rotation = Quaternion.Euler(0, 0, convertToAngle(d));
     }
 
     public Vector2 getDirection()
     {
-        if(direction == Vector2.zero)
-        {
-            return new Vector2(0, -1);
-        }
-        return direction;
+        return convertFromAngle(transform.rotation.eulerAngles.z);
     }
 
     public CharacterStats getCharacterStats()
@@ -129,6 +137,12 @@ public abstract class BaseCharacter : MonoBehaviour {
     static public float convertToAngle(Vector2 v)
     {
         return ((v.x < 0) ? -1 : 1) * Vector2.Angle(Vector2.down, v);
+    }
+    static public Vector2 convertFromAngle(float angle)
+    {
+        float x = Mathf.Sin(Mathf.Deg2Rad * angle);
+        float y = -Mathf.Cos(Mathf.Deg2Rad * angle);
+        return new Vector2(x, y);
     }
 
     public virtual Vector2 getMovementInput()
@@ -155,6 +169,11 @@ public abstract class BaseCharacter : MonoBehaviour {
         if (ai.Count > 0)
         {
             ai.Peek().fixedLogicTick();
+        }
+
+        if (characterStats.getHealth() <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -22,6 +22,6 @@ public class ProjectileBehaviour {
     public virtual void logicTick()
     { }
 
-    public virtual void onCollide(Collision2D collider)
+    public virtual void onCollide(Collider2D collider)
     { }
 }
