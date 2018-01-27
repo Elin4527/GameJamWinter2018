@@ -16,6 +16,8 @@ public abstract class BaseCharacter : MonoBehaviour {
     private Vector2 targetVelocity;
     private Vector2 direction;
 
+    private TileMap gameLevel;
+
     private Stack<AIBase> ai;
 
     protected bool friendly;
@@ -33,6 +35,16 @@ public abstract class BaseCharacter : MonoBehaviour {
             addAIState(startingAI);
         }
 	}
+
+    public void setTileMap(TileMap map)
+    {
+        gameLevel = map;
+    }
+
+    public TileMap getTileMap()
+    {
+        return gameLevel;
+    }
 
     public bool isFriendlyUnit()
     {

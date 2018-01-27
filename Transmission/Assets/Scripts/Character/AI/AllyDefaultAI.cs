@@ -14,6 +14,15 @@ public class AllyDefaultAI : AIBase {
             {
                 return (target.transform.position - character.transform.position).normalized * character.getCharacterStats().getSpeed();
             }
+            else
+            {
+                Debug.Log("Path Blocked");
+                List<GameObject> nodes = pathFinder.pathFindTo(character.transform.position, target.transform.position, character.getTileMap());
+                if (nodes != null)
+                {
+                    return ((nodes[0].transform.position - character.transform.position).normalized * character.getCharacterStats().getSpeed());
+                }
+            }
         }
         return Vector2.zero;
     }

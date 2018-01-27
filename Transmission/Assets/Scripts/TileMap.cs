@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TileMap : MonoBehaviour {
 
-
-
-
 	private float tileSize;
 	private GameObject [,] tiles;
 
@@ -62,8 +59,18 @@ public class TileMap : MonoBehaviour {
 		int y = (int)((-pos.y +0.5*getTileSize()) / getTileSize());
 		return new Vector2Int(x, y);
 	}
-	// Update is called once per frame
-	void Update () {
+
+    public Vector3 convertTileCoords(Vector2 tileCoords)
+    {
+        Vector3 boardTranslate = transform.position;
+
+        Vector3 loc = new Vector3(tileCoords.x * getTileSize() + boardTranslate.x, - tileCoords.y * getTileSize() +  boardTranslate.y);
+
+        return loc;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

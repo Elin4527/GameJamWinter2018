@@ -5,26 +5,6 @@ using UnityEngine;
 
 public class Timeline : MonoBehaviour {
 
-	/**
-	[Serializable]
-	public class SpawnEnemyEventField {
-		public float startTime;
-		public Vector2 tileCoords;
-		public GameObject enemy;
-		public GameObject attack;
-		public float despawn;
-
-		public SpawnEnemyEventField(float startTime, Vector2 tileCoords,
-			GameObject enemy, GameObject attack, float despawn){
-			this.startTime = startTime;
-			this.tileCoords = tileCoords;
-			this.enemy = enemy;
-			this.attack = attack;
-			this.despawn = despawn;
-		}
-	}
-	**/
-
 	public SpawnEnemyEvent [] spawnEnemyEvents;
 	public float nextLevelDelay;
 	//private NextLevelEvent nextLevelEvent;

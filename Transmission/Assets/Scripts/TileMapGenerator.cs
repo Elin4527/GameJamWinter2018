@@ -22,7 +22,7 @@ public class TileMapGenerator : MonoBehaviour {
 	public GameObject[] sceneryNonBlocking; //5
 
 	public Vector3 boardTranslate;
-	public const float size = 0.889999f;
+	public const float size = 8.0f/9.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -31,8 +31,7 @@ public class TileMapGenerator : MonoBehaviour {
 	}
 
 	int [] [] parseTextMap(String textMap){
-
-		string[] lines = textMap.Split('\n');
+        string[] lines = System.Text.RegularExpressions.Regex.Split(textMap, "\r*\n");
 
         char[][] charMap = new char[lines.Length-1][];
 
@@ -45,14 +44,14 @@ public class TileMapGenerator : MonoBehaviour {
 
 		print(rows);
 		print(columns);
-		/**
-		for(int y = 0; y < charMap.Length; y++) {
-			for(int x = 0; x < charMap[0].Length; x++) {
-				print(charMap[y][x]);
-			}
-			print("\n");
-		}
-		**/
+		
+		//for(int y = 0; y < charMap.Length; y++) {
+		//	for(int x = 0; x < charMap[0].Length; x++) {
+		//		print(charMap[y][x]);
+		//	}
+		//	print("\n");
+		//}
+		
 
         int[][] numMap = new int[rows][];
 
@@ -62,7 +61,8 @@ public class TileMapGenerator : MonoBehaviour {
 
         for (int y=0; y < rows; y++){
         	for (int x=0; x<columns; x++){
-				if (charMap[y][x] !='-'){
+				if (charMap[y][x] != '-' && !char.IsWhiteSpace(charMap[y][x])){
+                    Debug.Log(charMap[y][x].ToString());
 					numMap[y][x] = int.Parse(charMap[y][x].ToString());
 				}
 				else {

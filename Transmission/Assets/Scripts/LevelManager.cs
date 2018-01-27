@@ -13,9 +13,9 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public GameObject[] levels;
-	public GameObject [] players;
+	public AllyCharacter [] players;
 	private GameObject instantiatedLevel;
-
+    private List<AllyCharacter> instantiatedPlayers;
 
 	private int index = 0;
 
@@ -27,10 +27,11 @@ public class LevelManager : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		foreach (GameObject p in players){
-			Instantiate(p);
+        instantiatedPlayers = new List<AllyCharacter>();
+		foreach (AllyCharacter p in players){
+            instantiatedPlayers.Add(Instantiate(p));
 		}
-		buildLevel(index, players);
+		buildLevel(index);
 		//TileMap t = current().tileMap.GetComponent<TileMap>();
 		//print(t.getTileCoords(new Vector2(-11.5f, 18.7f)));
 		//print(t.getTileCoords(new Vector2(-10.5f, 18.9f)));
@@ -38,18 +39,18 @@ public class LevelManager : MonoBehaviour {
 	}
 		
 
-	void buildLevel(int index, GameObject [] players){
+	void buildLevel(int index){
 		instantiatedLevel = Instantiate(levels[index]);
 		instantiatedLevel.transform.parent = transform;
-
-		instantiatedLevel.GetComponent<Level>().loadPlayers(players);
+        instantiatedLevel.GetComponent<Level>().init();
+		instantiatedLevel.GetComponent<Level>().loadPlayers(instantiatedPlayers);
 	}
 
 	void nextLevel(){
 		Destroy (instantiatedLevel);
 		index++;
 		if (index < levels.Length) {
-			buildLevel (index, players);
+			buildLevel (index);
 		} else {
 			gameOver();
 		}

@@ -5,6 +5,12 @@ using UnityEngine;
 public abstract class AIBase {
 
     protected BaseCharacter character;
+    protected Pathfinding pathFinder;
+
+    protected AIBase()
+    {
+        pathFinder = new Pathfinding();
+    }
 
     public void setCharacter(BaseCharacter c)
     {
