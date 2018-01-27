@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour {
     private Rigidbody2D rigidBody;
     private Vector2 lastPosition;
     private List<ProjectileBehaviour> behaviours;
+    private int projectileDamage;
+    private bool friendly;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +20,7 @@ public class Projectile : MonoBehaviour {
         lastPosition = transform.position;
     }
 
-    public void init(BaseCharacter p, Vector2 velocity, float range)
+    public void init(BaseCharacter p, Vector2 velocity, float range, int damage)
     {
         rigidBody = GetComponent<Rigidbody2D>();
 
@@ -26,10 +28,13 @@ public class Projectile : MonoBehaviour {
         rigidBody.velocity = velocity;
         distanceLimit = range;
         distanceTraveled = 0.0f;
+        projectileDamage = damage;
+        friendly = p.isFriendlyUnit();
     }
 
     public void addBehaviour(ProjectileBehaviour b)
     {
+        b.setProjectile(this);
         behaviours.Add(b);
     }
 
@@ -73,11 +78,25 @@ public class Projectile : MonoBehaviour {
         return rigidBody.velocity;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Triggered");
         foreach(ProjectileBehaviour b in behaviours)
         {
             b.onCollide(collision);
+        }
+        
+        BaseCharacter c = collision.gameObject.GetComponent<BaseCharacter>();
+        if (c != null)
+        {
+            Debug.Log("Bullet is " + friendly);
+            Debug.Log("Enemy is " + c.isFriendlyUnit());
+        }
+        if (c != null && c.isFriendlyUnit() != friendly)
+        {
+            Debug.Log("I got here");
+            c.applyDamage(projectileDamage);
+            Destroy(gameObject);
         }
     }
 }

@@ -10,7 +10,7 @@ public class CharacterStats {
     private int defense;
 
     private int power;
-    private int speed;
+    private float speed;
 
     public void modifyDefense(int change)
     {
@@ -31,7 +31,9 @@ public class CharacterStats {
     {
         maxHealth += change;
         if (maxHealth < 0)
+        {
             maxHealth = 0;
+        }
 
         modifyHealth(0);
     }
@@ -39,11 +41,18 @@ public class CharacterStats {
     public void modifyHealth(int change)
     {
         currHealth += change;
-        if (currHealth < 0) currHealth = 0;
-        if (currHealth > maxHealth) currHealth = maxHealth;
+
+        if (currHealth < 0)
+        {
+            currHealth = 0;
+        }
+        if (currHealth > maxHealth)
+        {
+            currHealth = maxHealth;
+        }
     }
 
-    public void modifySpeed(int change)
+    public void modifySpeed(float change)
     {
         speed += change;
         if (speed < 0) speed = 0;
@@ -57,7 +66,7 @@ public class CharacterStats {
 
     public void setMaxHealth(int value)
     {
-        modifyHealth(value - maxHealth);
+        modifyMaxHealth(value - maxHealth);
     }
 
     public void setHealth(int value)
@@ -65,7 +74,7 @@ public class CharacterStats {
         modifyHealth(value - currHealth);
     }
 
-    public void setSpeed(int value)
+    public void setSpeed(float value)
     {
         modifySpeed(value - speed);
     }
@@ -85,7 +94,7 @@ public class CharacterStats {
         return maxHealth;
     }
 
-    public int getSpeed()
+    public float getSpeed()
     {
         return speed;
     }

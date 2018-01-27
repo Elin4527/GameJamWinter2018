@@ -13,13 +13,20 @@ public class ProjectileSpawner : MonoBehaviour {
     public bool firing = false;
     public Projectile projectilePrefab;
     public BaseCharacter parent;
-    public ProjectileBehaviour[] behaviours;
+    public List<ProjectileSpawnerBehaviour> behaviours;
 
 	// Use this for initialization
 	void Start () {
+        behaviours = new List<ProjectileSpawnerBehaviour>();
         parent = GetComponent<BaseCharacter>();
 	}
 	
+    public void addSpawnerBehaviour(ProjectileSpawnerBehaviour b)
+    {
+        b.applySpawnerModifications(this);
+        behaviours.Add(b);
+    }
+
     public void setFiring(bool fire)
     {
         firing = fire;
@@ -35,19 +42,28 @@ public class ProjectileSpawner : MonoBehaviour {
         timeElapsed += Time.deltaTime;
         if(timeElapsed > cooldown && firing)
         {
-            fireProjectile();
+            startFire();
             timeElapsed -= cooldown;
         }
 	}
 
-    void fireProjectile()
+    private void startFire()
+    {
+        foreach (ProjectileSpawnerBehaviour b in behaviours)
+        {
+            b.onFireAttempted(this);
+        }
+        fireProjectile();
+    }
+
+    public void fireProjectile()
     {
         float angle = Projectile.convertToAngle(parent.getDirection());
         Projectile p = Instantiate(projectilePrefab, transform.position + (Vector3)parent.getDirection() * offset, Quaternion.Euler(0, 0, angle));
-        p.init(parent, parent.getDirection() * speed, range);
-        foreach(ProjectileBehaviour b in behaviours)
+        p.init(parent, parent.getDirection() * speed, range, parent.getCharacterStats().getPower());
+        foreach(ProjectileSpawnerBehaviour b in behaviours)
         {
-            p.addBehaviour(Instantiate(b, transform));
+            b.applyProjectileModifications(p);
         }
     }
 }
