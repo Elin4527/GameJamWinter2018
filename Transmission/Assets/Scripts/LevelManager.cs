@@ -31,6 +31,10 @@ public class LevelManager : MonoBehaviour {
 			Instantiate(p);
 		}
 		buildLevel(index, players);
+		//TileMap t = current().tileMap.GetComponent<TileMap>();
+		//print(t.getTileCoords(new Vector2(-11.5f, 18.7f)));
+		//print(t.getTileCoords(new Vector2(-10.5f, 18.9f)));
+		//print(t.getTileCoords(new Vector2(3.56f, -1.2f)));
 	}
 		
 

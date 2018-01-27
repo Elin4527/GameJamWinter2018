@@ -4,18 +4,64 @@ using UnityEngine;
 
 public class TileMap : MonoBehaviour {
 
+
+
+
+	private float tileSize;
 	private GameObject [,] tiles;
+
 	// Use this for initialization
 	void Start () {}
 
+	public int getRows(){
+		return tiles.GetLength(0);
+	}
+
+	public int getCols(){
+		return tiles.GetLength(1);
+	}
+
+	/**
+	 *  don't call this function
+	 **/
+	public void setTileSize(float size){
+		this.tileSize = size;
+	}
+
+	public float getTileSize(){
+		return TileMapGenerator.size;
+	}
+
+	/**
+	 *  don't call this function
+	 **/
 	public void setTiles(GameObject [,] tiles){
 		this.tiles = tiles;
 	}
 
-	public GameObject getTile(int y, int x){
+	public GameObject getTile(int x, int y){
 		return tiles[y,x];
 	}
 
+	/**
+	 * produces tile corresponding to world coordinates
+	 **/
+	public GameObject getTile(Vector2 pos){
+		Vector2Int tileCoords = getTileCoords(pos);
+		return getTile(tileCoords.x, tileCoords.y);
+	}
+
+	/**
+	 *  produces tileCoords from world coords
+	 **/
+	public Vector2Int getTileCoords(Vector2 pos){
+		pos.x -= transform.position.x;
+		pos.x -= transform.position.x;
+
+		int x = (int)((pos.x + 0.5*getTileSize() / getTileSize()));
+		int y = (int)((-pos.y +0.5*getTileSize()) / getTileSize());
+		return new Vector2Int(x, y);
+	}
 	// Update is called once per frame
 	void Update () {
 		

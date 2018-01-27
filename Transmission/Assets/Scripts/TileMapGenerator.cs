@@ -22,7 +22,7 @@ public class TileMapGenerator : MonoBehaviour {
 	public GameObject[] sceneryNonBlocking; //5
 
 	public Vector3 boardTranslate;
-
+	public const float size = 0.889999f;
 
 	// Use this for initialization
 	void Start () {
@@ -111,8 +111,8 @@ public class TileMapGenerator : MonoBehaviour {
 				}
 				if(toInstantiate) {
 					GameObject instance = Instantiate(toInstantiate, 
-						new Vector3(0.89f*x, 0.89f*-y + 
-							((map[y][x] == 1 || map[y][x] == 2 || map[y][x] == 3  ) ? 0.89f*-0.25f : 0),
+						new Vector3(size*x, size*-y + 
+							((map[y][x] == 1 || map[y][x] == 2 || map[y][x] == 3  ) ? size*-0.25f : 0),
 							0.0f), Quaternion.identity) as GameObject;
 					instance.transform.SetParent(tileMap.transform);
 					tiles[y,x] = instance;
@@ -134,7 +134,9 @@ public class TileMapGenerator : MonoBehaviour {
 			}
 		}
 		TileMap t = tileMap.GetComponent<TileMap>() as TileMap;
+		//t.setTileSize(size);
 		t.setTiles(tiles);
+		/**/
 	}
 
 	public Vector2 getBoardTranslate(){

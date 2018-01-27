@@ -6,6 +6,7 @@ public class Tile : MonoBehaviour {
 
 	public GameObject sceneryObject;
 	private GameObject item;
+	public Vector2Int tileCoord;
 
 	public void setItem(GameObject item){
 		this.item = item;
@@ -26,7 +27,7 @@ public class Tile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	}
