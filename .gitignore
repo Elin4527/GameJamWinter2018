@@ -6,6 +6,9 @@
 /Transmission/Assets/AssetStoreTools*
 /Transmission/Assets/Scenes/Personal*
 
+#mac auto files
+/**/.DS_Store
+
 # Visual Studio 2015 cache directory
 /.vs/
 
