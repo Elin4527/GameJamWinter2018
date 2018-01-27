@@ -75,6 +75,7 @@ public abstract class BaseCharacter : MonoBehaviour {
     public void setDirection(Vector2 d)
     {
         direction = d.normalized;
+        transform.rotation = Quaternion.Euler(0, 0, convertToAngle(d));
     }
 
     public Vector2 getDirection()
@@ -96,6 +97,11 @@ public abstract class BaseCharacter : MonoBehaviour {
         }
         fixedLogic();
         transform.position += (Vector3)currentVelocity * Time.fixedDeltaTime;
+    }
+
+    static public float convertToAngle(Vector2 v)
+    {
+        return ((v.x < 0) ? -1 : 1) * Vector2.Angle(Vector2.down, v);
     }
 
     public abstract Vector2 getMovementInput();
