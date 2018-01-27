@@ -9,27 +9,50 @@ public abstract class BaseCharacter : MonoBehaviour {
     public int startingSpeed;
     public int startingPower;
     public int startingDefense;
+    public AIBase startingAI;
 
     private Vector2 currentVelocity;
     private Vector2 velocityDelta;
     private Vector2 targetVelocity;
     private Vector2 direction;
 
+    private Stack<AIBase> ai;
+
     protected CharacterStats characterStats;
 
 	// Use this for initialization
 	void Start () {
         characterStats = new CharacterStats();
+        ai = new Stack<AIBase>();
         init();
         initStats(startingHealth, startingSpeed, startingPower, startingDefense);
+        if(startingAI != null)
+        {
+            addAIState(startingAI);
+        }
 	}
 
-    protected void initStats(int health, int power, int speed, int defense)
+    public void addAIState(AIBase state)
+    {
+        state.setCharacter(this);
+        ai.Push(state);
+    }
+
+    public void swapAIState(AIBase state)
+    {
+        ai.Pop();
+
+        state.setCharacter(this);
+        ai.Push(state);
+    }
+
+    protected void initStats(int health, int speed, int power, int defense)
     {
         characterStats.setMaxHealth(health);
         characterStats.setHealth(health);
-        characterStats.setPower(power);
         characterStats.setSpeed(speed);
+        characterStats.setPower(power);
+        characterStats.setDefense(defense);
     } 
 
     protected virtual void init()
@@ -80,6 +103,10 @@ public abstract class BaseCharacter : MonoBehaviour {
 
     public Vector2 getDirection()
     {
+        if(direction == Vector2.zero)
+        {
+            return new Vector2(0, -1);
+        }
         return direction;
     }
 
@@ -104,9 +131,30 @@ public abstract class BaseCharacter : MonoBehaviour {
         return ((v.x < 0) ? -1 : 1) * Vector2.Angle(Vector2.down, v);
     }
 
-    public abstract Vector2 getMovementInput();
+    public virtual Vector2 getMovementInput()
+    {
+        if (ai.Count > 0)
+        {
+            return ai.Peek().frameInput();
+        }
+        return Vector2.zero;
+    }
     public virtual void logic()
-    { }
+    {
+        if(ai.Count > 0)
+        {
+            ai.Peek().fixedLogicTick();
+        }
+    }
     public virtual void fixedLogic()
-    { }
+    {
+        while (ai.Count > 0 && !ai.Peek().isValid())
+        {
+            ai.Pop();
+        }
+        if (ai.Count > 0)
+        {
+            ai.Peek().fixedLogicTick();
+        }
+    }
 }

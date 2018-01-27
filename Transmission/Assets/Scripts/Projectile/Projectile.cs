@@ -30,6 +30,7 @@ public class Projectile : MonoBehaviour {
 
     public void addBehaviour(ProjectileBehaviour b)
     {
+        b.setProjectile(this);
         behaviours.Add(b);
     }
 
