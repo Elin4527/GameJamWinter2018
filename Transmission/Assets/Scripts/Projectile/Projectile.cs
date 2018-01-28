@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour {
     private List<BaseCharacter> hit;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         behaviours = new List<ProjectileBehaviour>();
         lastPosition = transform.position;
         hit = new List<BaseCharacter>();

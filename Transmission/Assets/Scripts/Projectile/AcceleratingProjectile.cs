@@ -14,7 +14,7 @@ public class AcceleratingProjectile : ProjectileBehaviour {
     public override void logicTick()
     {
         Vector2 currVel = projectile.getVelocity();
-        projectile.setVelocity(currVel + (currVel.normalized * 0.1f * Time.fixedDeltaTime));
+        projectile.setVelocity(currVel + (currVel.normalized * 2.0f * Time.fixedDeltaTime));
     }
 
     public override void onCollide(Collider2D collider)

@@ -12,7 +12,7 @@ public abstract class AreaAbility : Ability {
 	void Start () {}
 
 	public override void updateValidity(Vector2 mouseWorldPos){
-		if(Physics2D.OverlapCircle(mouseWorldPos, radius, LayerMask.NameToLayer("Wall"))) {
+		if(Physics2D.OverlapCircle(mouseWorldPos, radius, LayerMask.GetMask("Wall"))) {
 			base.validity = false;
 		} else {
 			base.validity = true;

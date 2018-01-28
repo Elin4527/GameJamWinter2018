@@ -12,6 +12,7 @@ public class WeaponPowerUp : FriendlyItem {
         if(b.isFriendlyUnit())
         {
             b.addSpawnerBehaviour(Instantiate(powerUp));
+            Destroy(gameObject);
         }
     }
 }

@@ -5,15 +5,15 @@ using UnityEngine;
 public class AttackingAI : AIBase {
 
     public BaseCharacter target;
-
-    public AttackingAI(BaseCharacter character)
+    public AttackingAI(BaseCharacter t)
     {
-        target = character;
+        target = t;
     }
 
     public override Vector2 frameInput()
     {
-        if (target != null && (target.transform.position - character.transform.position).magnitude > character.GetComponent<ProjectileSpawner>().getAttackRange())
+        if (target != null && ((target.transform.position - character.transform.position).magnitude > character.GetComponent<ProjectileSpawner>().getAttackRange() 
+            || isPathBlocked(target.transform.position)))
         {
             return pathTo(target.transform.position);
         }
@@ -22,14 +22,21 @@ public class AttackingAI : AIBase {
 
     public override AIBase fixedLogicTick()
     {
-        character.GetComponent<ProjectileSpawner>().setFiring(target != null && (target.transform.position - character.transform.position).magnitude < character.GetComponent<ProjectileSpawner>().getAttackRange());
-
+        ProjectileSpawner weapon = character.GetComponent<ProjectileSpawner>();
+        if (target != null && (target.transform.position - character.transform.position).magnitude < character.GetComponent<ProjectileSpawner>().getAttackRange())
+        {
+            weapon.setFiring(true);
+            character.setDirection(target.transform.position - character.transform.position);
+        }
+        else {
+            weapon.setFiring(false);
+        }
         return null;
     }
 
     public override bool isValid()
     {
-        return target == null || (target.transform.position - character.transform.position).magnitude > character.getCharacterStats().getVision();
+        return (target != null && (target.transform.position - character.transform.position).magnitude <= character.getCharacterStats().getVision());
     }
 
     public override void logicTick()

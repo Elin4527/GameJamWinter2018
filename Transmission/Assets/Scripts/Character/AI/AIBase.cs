@@ -22,6 +22,34 @@ public abstract class AIBase {
     public abstract Vector2 frameInput();
     public abstract bool isValid();
 
+    public T queryInRange<T> () where T:MapObject
+    {
+        float vision = character.getCharacterStats().getVision();
+        Vector2 topLeft = (Vector2)character.transform.position - new Vector2(vision, -vision);
+        Vector2 botRight = (Vector2)character.transform.position + new Vector2(vision, -vision);
+
+        List<T> query = LevelManager.instance().current().getObjectsInRange<T>(topLeft, botRight);
+
+        if (query != null)
+        {
+            T target = null;
+            float closest = vision;
+
+            foreach (T e in query)
+            {
+                float distance = (e.transform.position - character.transform.position).magnitude;
+                if (distance <= closest)
+                {
+                    target = e;
+                    closest = distance;
+                }
+            }
+
+            return target;
+        }
+        return null;
+    }
+
     protected bool isPathBlocked(Vector2 dest)
     {
         float width = character.GetComponent<CircleCollider2D>().radius;
@@ -40,6 +68,11 @@ public abstract class AIBase {
 
     protected Vector2 pathTo(Vector2 target)
     {
+        if ((target - (Vector2)character.transform.position).magnitude < 0.05f)
+        {
+            return Vector2.zero;
+        }
+
         Vector2 direction = Vector2.zero;
         if (!isPathBlocked(target))
         {
@@ -55,7 +88,10 @@ public abstract class AIBase {
                 {
                     if (!isPathBlocked(dest[i])) break;
                 }
-                direction = (dest[i] - (Vector2)character.transform.position).normalized;
+                if (i != 0)
+                {
+                    direction = (dest[i] - (Vector2)character.transform.position).normalized;
+                }
             }
 
         }

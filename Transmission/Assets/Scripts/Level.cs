@@ -23,7 +23,7 @@ public class Level : MonoBehaviour {
     }
 
 
-    public List<T> getObjectsInRange<T>(Vector2 topLeft, Vector2 bottomRight)
+    public List<T> getObjectsInRange<T>(Vector2 topLeft, Vector2 bottomRight) where T:MapObject
     {
         List<T> results = new List<T>();
 
@@ -77,12 +77,7 @@ public class Level : MonoBehaviour {
         levelEntities.Add(g);
         g.transform.parent = tileMapRef.transform;
         g.transform.position = tileMapRef.convertTileCoords(index);
-
-        BaseCharacter c = g.GetComponent<BaseCharacter>();
-        if(c != null)
-        {
-            c.setTileMap(tileMapRef.GetComponent<TileMap>());
-        }
+        g.setTileMap(tileMapRef);
     }
 
     public void removeLevelEntity(MapObject o)

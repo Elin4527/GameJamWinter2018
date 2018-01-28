@@ -17,11 +17,10 @@ public class WeaponStatModifier : ProjectileSpawnerBehaviour
     {
         p.modifyAttackRange(rangeModifier);
         p.modifySpeed(speedModifier);
-        p.modifyCooldownPercent(cooldownPercent);
+        p.modifyCooldownPercent(1.0f - cooldownPercent);
     }
 
     public override void onFireAttempted(ProjectileSpawner p)
     {
-        throw new NotImplementedException();
     }
 }

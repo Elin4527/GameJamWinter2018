@@ -22,6 +22,8 @@ public abstract class BaseCharacter : MapObject {
     private ProjectileSpawner weapon;
 
     protected bool friendly;
+    private bool popAI = false;
+    private AIBase nextAI;
 
     protected CharacterStats characterStats;
 
@@ -51,7 +53,16 @@ public abstract class BaseCharacter : MapObject {
     private void addAIState(AIBase state)
     {
         state.setCharacter(this);
-        ai.Push(state);
+        nextAI = state;
+    }
+
+    public void changeAIState(AIBase state)
+    {
+        if (ai.Count > 1)
+        {
+            popAI = true;
+        }
+        addAIState(state);
     }
 
     protected void initStats(int health, float speed, int power, int defense, float vision)
@@ -66,7 +77,11 @@ public abstract class BaseCharacter : MapObject {
 
     public void applyDamage(int damage)
     {
-        characterStats.modifyHealth(-damage + characterStats.getDefense());
+        int actualDamage = -damage + characterStats.getDefense();
+        if (actualDamage >= 0) actualDamage = -1;
+
+        characterStats.modifyHealth(actualDamage);
+        GraphicsEffectRenderer.instance().createTextEffect(actualDamage.ToString(), 18, 0, Color.red, 1.0f, true, (Vector2)transform.position + new Vector2(0.0f, 1.0f));
     }
 
     protected virtual void init()
@@ -163,6 +178,17 @@ public abstract class BaseCharacter : MapObject {
     }
     public virtual void fixedLogic()
     {
+        if (popAI)
+        {
+            popAI = false;
+            ai.Pop();
+        }
+        if(nextAI != null)
+        {
+            ai.Push(nextAI);
+            nextAI = null;
+        }
+
         while (ai.Count > 0 && !ai.Peek().isValid())
         {
             ai.Pop();

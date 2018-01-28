@@ -18,8 +18,7 @@ public class SpawnEnemyEvent : TimelineEvent{
 
 
 	public override void execute(){
-        EnemyCharacter e = UnityEngine.Object.Instantiate(enemy, Vector3.zero, new Quaternion());
+        EnemyCharacter e = UnityEngine.Object.Instantiate(enemy);
         LevelManager.instance().current().addLevelEntity(e, tileCoords);
 	}
-
 }

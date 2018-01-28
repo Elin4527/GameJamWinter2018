@@ -63,6 +63,7 @@ public class PathfindQueue {
             if(data[i] == node)
             {
                 data.RemoveAt(i);
+                break;
             }
         }
     }
