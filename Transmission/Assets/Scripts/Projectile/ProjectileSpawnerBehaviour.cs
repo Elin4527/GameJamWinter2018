@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ProjectileSpawnerBehaviour {
+public abstract class ProjectileSpawnerBehaviour: MonoBehaviour{
 
-    void applySpawnerModifications(ProjectileSpawner p);
-    void onFireAttempted(ProjectileSpawner p);
-    void applyProjectileModifications(Projectile p);
+    public abstract void applySpawnerModifications(ProjectileSpawner p);
+    public abstract void onFireAttempted(ProjectileSpawner p);
+    public abstract void applyProjectileModifications(Projectile p);
 }

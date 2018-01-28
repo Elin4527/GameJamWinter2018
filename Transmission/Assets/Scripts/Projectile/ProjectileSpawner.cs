@@ -24,6 +24,7 @@ public class ProjectileSpawner : MonoBehaviour {
     public void addSpawnerBehaviour(ProjectileSpawnerBehaviour b)
     {
         b.applySpawnerModifications(this);
+        b.transform.parent = transform;
         behaviours.Add(b);
     }
 
@@ -36,6 +37,35 @@ public class ProjectileSpawner : MonoBehaviour {
     {
         return range;
     }
+
+    public void modifyAttackRange(float change)
+    {
+        range += change;
+        if (range < 1.0f) range = 1.0f;
+    }
+
+    public float getCooldown(float getCooldown)
+    {
+        return cooldown;
+    }
+
+    public void modifyCooldownPercent(float change)
+    {
+        cooldown *= change;
+    }
+
+    public float getSpeed()
+    {
+        return speed;
+    }
+
+    public void modifySpeed(float change)
+    {
+        speed += change;
+        if (speed < 1.0f)
+            speed = 1.0f;
+    }
+
 
     public bool getFiring()
     {

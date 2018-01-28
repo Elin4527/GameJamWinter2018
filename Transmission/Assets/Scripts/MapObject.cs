@@ -21,4 +21,9 @@ public class MapObject : MonoBehaviour {
         Vector2Int pos1 = tileMap.getTileCoords(transform.position);
         return pos1.x * tileMap.getCols() + pos1.y;
     }
+
+    public void OnDestroy()
+    {
+        LevelManager.instance().current().removeLevelEntity(this);
+    }
 }

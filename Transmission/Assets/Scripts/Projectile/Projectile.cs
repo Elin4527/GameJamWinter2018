@@ -13,11 +13,24 @@ public class Projectile : MonoBehaviour {
     private List<ProjectileBehaviour> behaviours;
     private int projectileDamage;
     private bool friendly;
+    private bool shield;
+    private List<BaseCharacter> hit;
 
 	// Use this for initialization
 	void Start () {
         behaviours = new List<ProjectileBehaviour>();
         lastPosition = transform.position;
+        hit = new List<BaseCharacter>();
+    }
+
+    public bool hasShield()
+    {
+        return shield;
+    }
+
+    public void giveShield()
+    {
+        shield = true;
     }
 
     public void init(BaseCharacter p, Vector2 velocity, float range, int damage)
@@ -35,6 +48,7 @@ public class Projectile : MonoBehaviour {
     public void addBehaviour(ProjectileBehaviour b)
     {
         b.setProjectile(this);
+        b.startUp();
         behaviours.Add(b);
     }
 
@@ -81,17 +95,25 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach(ProjectileBehaviour b in behaviours)
-        {
-            b.onCollide(collision);
-        }
-        
         BaseCharacter c = collision.gameObject.GetComponent<BaseCharacter>();
 
-        if (c != null && c.isFriendlyUnit() != friendly)
+        if (c != null && c.isFriendlyUnit() != friendly && !hit.Contains(c))
         {
+            foreach (ProjectileBehaviour b in behaviours)
+            {
+                b.onCollide(collision);
+            }
+
+            hit.Add(c);
             c.applyDamage(projectileDamage);
-            Destroy(gameObject);
+            if (shield)
+            {
+                shield = false;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

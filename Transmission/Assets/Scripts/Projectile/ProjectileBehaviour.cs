@@ -6,17 +6,12 @@ public class ProjectileBehaviour {
 
     protected Projectile projectile;
 
-	// Use this for initialization
-	void Start () {
-        startUp();
-	}
-
     public void setProjectile(Projectile p)
     {
         projectile = p;
     }
 
-    protected virtual void startUp()
+    public virtual void startUp()
     { }
 
     public virtual void logicTick()

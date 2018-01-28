@@ -19,6 +19,7 @@ public abstract class BaseCharacter : MapObject {
     private Vector2 direction;
 
     private Stack<AIBase> ai;
+    private ProjectileSpawner weapon;
 
     protected bool friendly;
 
@@ -34,7 +35,13 @@ public abstract class BaseCharacter : MapObject {
         {
             addAIState(startingAI);
         }
+        weapon = GetComponent<ProjectileSpawner>();
 	}
+
+    public void addSpawnerBehaviour(ProjectileSpawnerBehaviour b)
+    {
+        weapon.addSpawnerBehaviour(b);
+    }
 
     public bool isFriendlyUnit()
     {
@@ -171,13 +178,8 @@ public abstract class BaseCharacter : MapObject {
 
         if (characterStats.getHealth() <= 0)
         {
-            kill();
+            Destroy(gameObject);
         }
     }
 
-    protected virtual void kill()
-    {
-        LevelManager.instance().current().removeLevelEntity(this);
-        Destroy(gameObject);
-    }
 }
