@@ -44,7 +44,7 @@ public class ProjectileSpawner : MonoBehaviour {
         if (range < 1.0f) range = 1.0f;
     }
 
-    public float getCooldown(float getCooldown)
+    public float getCooldown()
     {
         return cooldown;
     }

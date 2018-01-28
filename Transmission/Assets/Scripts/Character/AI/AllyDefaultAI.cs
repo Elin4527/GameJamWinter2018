@@ -5,15 +5,51 @@ using UnityEngine;
 
 public class AllyDefaultAI : AIBase {
 
+    Vector2 dest;
+
+    public override void startUp()
+    {
+        dest = character.transform.position;
+    }
+
     public override Vector2 frameInput()
     {
         Vector2Int target = LevelManager.instance().current().getGoalPoint();
         if (target.x >= 0 && target.y >= 0)
         {
-            Vector2 dest = character.getTileMap().convertTileCoords(target);
+            dest = character.getTileMap().convertTileCoords(target);
             return pathTo(dest);
         }
-        return Vector2.zero;
+        else if ((dest - (Vector2)character.transform.position).magnitude < 0.1f)
+        {
+            bool flag = false;
+            while (!flag)
+            {
+                UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
+                dest = character.getCharacterStats().getVision() / 2.0f * UnityEngine.Random.insideUnitCircle;
+                Vector2Int tileCoords = character.getTileMap().getTileCoords(dest);
+
+                GameObject g = character.getTileMap().getTile(tileCoords);
+
+                if (g == null || g.tag == "Wall")
+                {
+                    continue;
+                }
+
+                flag = true;
+                for (int i = 0; i < g.transform.childCount; i++)
+                {
+                    if (g.transform.GetChild(i).tag == "Wall")
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                flag = (dest - (Vector2)character.transform.position).magnitude >= 0.1f;
+            }
+        }
+        return pathTo(dest);
     }
 
     public override AIBase fixedLogicTick()
