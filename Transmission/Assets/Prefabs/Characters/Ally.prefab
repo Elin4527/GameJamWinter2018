@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df9d74825b59094b85c73680a098c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 4
   speed: 3
   cooldown: 1
   timeElapsed: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2cc5b1273a72e4b86bcb1cc1963695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 5
   startingSpeed: 1
   startingPower: 1
   startingDefense: 0

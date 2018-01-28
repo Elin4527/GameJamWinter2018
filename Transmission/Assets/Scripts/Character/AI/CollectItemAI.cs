@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllyDefaultAI : AIBase {
+public class CollectItemAI : AIBase {
+
+    Item target;
+
+    public CollectItemAI(Item item)
+    {
+        target = item;
+    }
 
     public override Vector2 frameInput()
     {
-        Vector2Int target = LevelManager.instance().current().getGoalPoint();
-        if (target.x >= 0 && target.y >= 0)
+        if (target != null)
         {
-            Vector2 dest = character.getTileMap().convertTileCoords(target);
-            return pathTo(dest);
+            return pathTo(target.transform.position);
         }
         return Vector2.zero;
     }
@@ -24,18 +28,12 @@ public class AllyDefaultAI : AIBase {
             return new AttackingAI(e);
         }
 
-        FriendlyItem i = queryInRange<FriendlyItem>();
-        if(i != null)
-        {
-            return new CollectItemAI(i);
-        }
-
         return null;
     }
 
     public override bool isValid()
     {
-        return true;
+        return (target != null && (target.transform.position - character.transform.position).magnitude <= character.getCharacterStats().getVision());
     }
 
     public override void logicTick()

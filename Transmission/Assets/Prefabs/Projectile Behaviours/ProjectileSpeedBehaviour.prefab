@@ -52,5 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeModifier: 0
-  speedModifier: 0.1
+  speedModifier: 0.2
   cooldownPercent: 0

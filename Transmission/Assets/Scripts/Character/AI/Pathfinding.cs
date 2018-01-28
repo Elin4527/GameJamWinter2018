@@ -98,7 +98,7 @@ public class Pathfinding {
         {
             List<Vector2> list = new List<Vector2>();
             PathfindNode n = closed.pop();
-
+            
             while (n != null)
             {
                 list.Insert(0, tileMap.getTile(n.index).transform.position);

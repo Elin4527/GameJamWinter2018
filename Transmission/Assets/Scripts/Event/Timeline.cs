@@ -6,6 +6,7 @@ using UnityEngine;
 public class Timeline : MonoBehaviour {
 
 	public SpawnEnemyEvent [] spawnEnemyEvents;
+    public ItemSpawnEvent[] spawnItemEvents;
 	public float nextLevelDelay;
 	//private NextLevelEvent nextLevelEvent;
 
@@ -19,6 +20,10 @@ public class Timeline : MonoBehaviour {
 		foreach(SpawnEnemyEvent e in spawnEnemyEvents) {
 			addEventToQueue(e);
 		}
+        foreach(ItemSpawnEvent i in spawnItemEvents)
+        {
+            addEventToQueue(i);
+        }
 		//queuedEvents.Sort((a, b) => a.getStartTime().CompareTo(b.getStartTime()));
 	}
 

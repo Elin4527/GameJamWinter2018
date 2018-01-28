@@ -55,4 +55,11 @@ MonoBehaviour:
   - startTime: 5
     tileCoords: {x: 15, y: 4}
     enemy: {fileID: 114064618032613002, guid: 2f5686c7ea1b7a54ab8c4b152bee80c1, type: 2}
+  - startTime: 10
+    tileCoords: {x: 17, y: 6}
+    enemy: {fileID: 114064618032613002, guid: 2f5686c7ea1b7a54ab8c4b152bee80c1, type: 2}
+  spawnItemEvents:
+  - startTime: 3
+    tileCoords: {x: 3, y: 3}
+    item: {fileID: 114572788653821832, guid: 0582447159ae17c4dade0036288dca31, type: 2}
   nextLevelDelay: 0

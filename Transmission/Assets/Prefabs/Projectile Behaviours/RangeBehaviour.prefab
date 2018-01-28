@@ -51,6 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ffb3ade26f2e5842b973a71a206d93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeModifier: 0.1
+  rangeModifier: 1
   speedModifier: 0
   cooldownPercent: 0
