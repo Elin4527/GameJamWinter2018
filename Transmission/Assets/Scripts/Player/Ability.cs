@@ -28,6 +28,8 @@ public abstract class Ability : MonoBehaviour {
 
 	public void use(Vector2 mouseWorldPos){
 
+        Debug.Log("Is Available " + isAvailable);
+        Debug.Log("Time Remaining " + remainingTime);
 		if(isAvailable && isValid()) {
 			activateAbility(delay, mouseWorldPos);
 			if(cooldown > 0) {
@@ -48,6 +50,7 @@ public abstract class Ability : MonoBehaviour {
 
 		if(!isAvailable) {
 			remainingTime -= Time.deltaTime;
+            Debug.Log("Decreasing Time" + remainingTime);
 			if(remainingTime <= 0.0f) {
 				isAvailable = true;
 			}

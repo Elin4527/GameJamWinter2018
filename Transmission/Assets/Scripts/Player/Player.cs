@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 
 	SpriteRenderer cursor;
 
-	public Ability[] abilities;
+	private Ability[] abilities;
 	public float cameraPanSpeed;
 
 	public GameObject RangeCircle;
@@ -46,11 +46,7 @@ public class Player : MonoBehaviour {
 		Cursor.visible = false;
 		middle = new Vector2((float)(screenWidth/2),(float) (screenHeight / 2));
 		Camera.main.transform.SetParent(this.transform);
-		/**
-		foreach(Ability a in abilities) {
-			Instantiate(a);
-		}
-		**/
+		
 		cursor = new GameObject("Cursor").AddComponent<SpriteRenderer>();
 		cursor.transform.position = Vector3.zero;
 		cursor.sortingLayerName = "UI";
@@ -61,7 +57,7 @@ public class Player : MonoBehaviour {
 
 		range = Instantiate(RangeCircle);
 		range.transform.SetParent(cursor.transform);
-
+        abilities = GetComponentsInChildren<Ability>();
 	}
 
 	void switchToAbility(int index, Vector2 worldCursorPos){

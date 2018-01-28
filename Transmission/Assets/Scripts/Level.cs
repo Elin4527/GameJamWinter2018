@@ -12,6 +12,7 @@ public class Level : MonoBehaviour {
     public TileMap tileMapRef;
 
 	private List<AllyCharacter> players;
+    private Timeline timelineRef;
 
     public List<MapObject> levelEntities;
     private GameObjectSorter objectSorter;
@@ -59,7 +60,8 @@ public class Level : MonoBehaviour {
         TileMapGenerator gen = Instantiate(tileMap);
         tileMapRef = gen.run();
         tileMapRef.transform.parent = transform;
-        Instantiate(timelineExecutor).transform.parent = transform;
+        timelineRef = Instantiate(timelineExecutor);
+        timelineRef.transform.parent = transform;
     }
 
     public Vector2Int getSpawnPoint()
@@ -96,7 +98,7 @@ public class Level : MonoBehaviour {
 	}
 
 	public Timeline timeline(){
-		return timelineExecutor;
+		return timelineRef;
 	}
 	
 	// Update is called once per frame

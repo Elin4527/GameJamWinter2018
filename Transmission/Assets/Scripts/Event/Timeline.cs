@@ -10,7 +10,7 @@ public class Timeline : MonoBehaviour {
 	public float nextLevelDelay;
 	//private NextLevelEvent nextLevelEvent;
 
-	private List<TimelineEvent> queuedEvents = new List<TimelineEvent>();
+	public List<TimelineEvent> queuedEvents = new List<TimelineEvent>();
 
 	private bool imminentExit;
 	private float clock = 0f;
