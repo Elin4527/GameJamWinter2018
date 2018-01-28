@@ -12,7 +12,7 @@ public class TileMapGenerator : MonoBehaviour {
 	private int columns;
 	private int rows;
 
-	// mark empty space as -
+	public GameObject empty; // mark empty space as -
 	public GameObject [] floorTiles; // 0
 	public GameObject wallBase; // 1 
 	public GameObject wallMid; // 2
@@ -105,8 +105,7 @@ public class TileMapGenerator : MonoBehaviour {
 					toInstantiate = floorTiles[x % floorTiles.Length];
 					break;
 				default:
-					toInstantiate = null;
-					print("no obj at " + y + "," + x);
+					toInstantiate = empty;
 					break;
 				}
 				if(toInstantiate) {
@@ -122,10 +121,10 @@ public class TileMapGenerator : MonoBehaviour {
 					if (map[y][x] == 4 || map[y][x] == 5){
 						GameObject sceneryItem;
 						if(map[y][x] == 4) {
-							sceneryItem = Instantiate(sceneryBlocking[Random.Range(0, sceneryBlocking.Length - 1)]);
+							sceneryItem = Instantiate(sceneryBlocking[Random.Range(0, sceneryBlocking.Length)]);
 						}
 						else {
-							sceneryItem = Instantiate(sceneryNonBlocking[Random.Range(0, sceneryBlocking.Length - 1)]);
+							sceneryItem = Instantiate(sceneryNonBlocking[Random.Range(0, sceneryNonBlocking.Length)]);
 						}
 						sceneryItem.transform.SetParent(instance.transform, false);
 						((Tile)tiles[y, x].GetComponent<Tile>()).setSceneryObject(sceneryItem);

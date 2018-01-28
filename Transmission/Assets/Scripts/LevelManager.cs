@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour {
 	public GameObject [] players;
 	private GameObject instantiatedLevel;
 
-
+		
 	private int index = 0;
 
 	// when we're instantiated and there is an existing level manager - delete
@@ -31,7 +31,7 @@ public class LevelManager : MonoBehaviour {
 			Instantiate(p);
 		}
 		buildLevel(index, players);
-		//TileMap t = current().tileMap.GetComponent<TileMap>();
+		TileMap t = current().tileMap.GetComponent<TileMap>();
 		//print(t.getTileCoords(new Vector2(-11.5f, 18.7f)));
 		//print(t.getTileCoords(new Vector2(-10.5f, 18.9f)));
 		//print(t.getTileCoords(new Vector2(3.56f, -1.2f)));
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	// needs work
