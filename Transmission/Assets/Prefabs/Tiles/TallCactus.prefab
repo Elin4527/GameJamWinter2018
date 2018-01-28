@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212220832130416774}
   - component: {fileID: 61181808514468316}
   - component: {fileID: 114154494805163480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TallCactus
   m_TagString: Wall
   m_Icon: {fileID: 0}

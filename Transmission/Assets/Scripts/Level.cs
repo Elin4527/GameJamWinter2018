@@ -9,7 +9,7 @@ public class Level : MonoBehaviour {
 	public Timeline timelineExecutor;
 	public TileMapGenerator tileMap;
 
-    private TileMap tileMapRef;
+    public TileMap tileMapRef;
 
 	private List<AllyCharacter> players;
 

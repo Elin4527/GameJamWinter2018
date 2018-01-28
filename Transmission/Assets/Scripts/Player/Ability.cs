@@ -27,6 +27,7 @@ public abstract class Ability : MonoBehaviour {
 	}
 
 	public void use(Vector2 mouseWorldPos){
+
 		if(isAvailable && isValid()) {
 			activateAbility(delay, mouseWorldPos);
 			if(cooldown > 0) {
