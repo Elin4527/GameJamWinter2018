@@ -45,7 +45,14 @@ public class PathfindQueue {
 
     public void insertNode(PathfindNode node)
     {
-        data.Insert(binarySearchEnd(node), node);
+        if (data.Count == 0)
+        {
+            data.Add(node);
+        }
+        else
+        {
+            data.Insert(binarySearchStart(node), node);
+        }
     }
 
     public void removeNode(PathfindNode node)
@@ -68,25 +75,16 @@ public class PathfindQueue {
     private int binarySearchStart(PathfindNode node)
     {
         int min = 0;
-        int max = data.Count - 1;
-        while (min <= max)
+        int max = data.Count;
+        while (min < max)
         {
             int mid = (min + max) / 2;
-            if (node.weight == data[mid].weight)
-            {
-                while (node.weight == data[mid].weight && mid >= data.Count)
-                {
-                    mid--;
-                }
-                return mid + 1;
-            }
-            else if (node.weight < data[mid].weight)
-            {
-                max = mid - 1;
-            }
-            else
+            if (data[mid].weight < node.weight)
             {
                 min = mid + 1;
+            }
+            else {
+                max = mid;
             }
         }
         return min;
@@ -95,21 +93,13 @@ public class PathfindQueue {
     private int binarySearchEnd(PathfindNode node)
     {
         int min = 0;
-        int max = data.Count - 1;
-        while(min <= max)
+        int max = data.Count;
+        while(min < max)
         {
             int mid = (min + max) / 2;
-            if (node.weight == data[mid].weight)
+            if (data[mid].weight > node.weight)
             {
-                while (node.weight == data[mid].weight && mid < data.Count)
-                {
-                    mid++;
-                }
-                return mid;
-            }
-            else if (node.weight < data[mid].weight)
-            {
-                max = mid - 1;
+                max = mid;
             }
             else
             {

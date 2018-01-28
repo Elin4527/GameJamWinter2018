@@ -15,7 +15,7 @@ public class Pathfinding {
         closed = new PathfindQueue();
     }
 
-    public List<GameObject> pathFindTo(Vector2 origin, Vector2 dest, TileMap map)
+    public List<Vector2> pathFindTo(Vector2 origin, Vector2 dest, TileMap map)
     {
         tileMap = map;
         open.clear();
@@ -35,7 +35,9 @@ public class Pathfinding {
             PathfindNode currNode = open.pop();
             closed.insertNode(currNode);
             if (currNode.index == end)
+            {
                 break;
+            }
 
             for (int x = -1; x <= 1; x++)
             {
@@ -47,16 +49,23 @@ public class Pathfinding {
                     }
 
                     Vector2Int neighbor = currNode.index + new Vector2Int(x, y);
-                    if(neighbor.x < 0 || neighbor.x >= map.getCols() || neighbor.y < 0 || neighbor.y >= map.getRows())
-                    {
-                        continue;
-                    }
-
                     GameObject g = map.getTile(neighbor);
+
                     if(g == null || g.tag == "Wall")
                     {
                         continue;
                     }
+
+                    bool flag = false;
+                    for (int i = 0; i < g.transform.childCount; i++)
+                    {
+                        if (g.transform.GetChild(i).tag == "Wall")
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (flag) continue;
 
                     float cost = (x == 0 || y == 0) ? d1Cost : d2Cost;
                     float currCost = currNode.cachedCost + cost;
@@ -78,6 +87,7 @@ public class Pathfinding {
                         n = new PathfindNode(neighbor);
                         n.parent = currNode;
                         n.weight = calculateWeight(neighbor);
+                        n.cachedCost = currCost;
                         open.insertNode(n);
                     }
 
@@ -86,14 +96,15 @@ public class Pathfinding {
         }
         if (closed.size() > 0)
         {
-            List<GameObject> path = new List<GameObject>();
+            List<Vector2> list = new List<Vector2>();
             PathfindNode n = closed.pop();
-            while (n.parent != null)
+
+            while (n != null)
             {
-                path.Insert(0, tileMap.getTile(n.index));
+                list.Insert(0, tileMap.getTile(n.index).transform.position);
                 n = n.parent;
             }
-            return path;
+            return list;
         }
         return null;
     }

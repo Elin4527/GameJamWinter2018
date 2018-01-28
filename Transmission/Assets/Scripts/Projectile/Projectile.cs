@@ -61,7 +61,8 @@ public class Projectile : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        distanceTraveled += ((Vector2)transform.position - lastPosition).sqrMagnitude;
+        distanceTraveled += ((Vector2)transform.position - lastPosition).magnitude;
+        lastPosition = transform.position;
         if(distanceTraveled >= distanceLimit)
         {
             Destroy(gameObject);
@@ -80,21 +81,15 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Triggered");
         foreach(ProjectileBehaviour b in behaviours)
         {
             b.onCollide(collision);
         }
         
         BaseCharacter c = collision.gameObject.GetComponent<BaseCharacter>();
-        if (c != null)
-        {
-            Debug.Log("Bullet is " + friendly);
-            Debug.Log("Enemy is " + c.isFriendlyUnit());
-        }
+
         if (c != null && c.isFriendlyUnit() != friendly)
         {
-            Debug.Log("I got here");
             c.applyDamage(projectileDamage);
             Destroy(gameObject);
         }

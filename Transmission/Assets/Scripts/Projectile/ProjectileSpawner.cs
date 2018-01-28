@@ -32,6 +32,11 @@ public class ProjectileSpawner : MonoBehaviour {
         firing = fire;
     }
 
+    public float getAttackRange()
+    {
+        return range;
+    }
+
     public bool getFiring()
     {
         return firing;
@@ -43,7 +48,7 @@ public class ProjectileSpawner : MonoBehaviour {
         if(timeElapsed > cooldown && firing)
         {
             startFire();
-            timeElapsed -= cooldown;
+            timeElapsed = 0.0f;
         }
 	}
 

@@ -54,5 +54,5 @@ MonoBehaviour:
   spawnPoint: {x: 4, y: 3}
   timelineExecutor: {fileID: 114657776498625788, guid: 9f926e1400721498395bec4af7869cfc,
     type: 2}
-  tileMap: {fileID: 114726635890913472, guid: d685cf8aebe294f198a717a04709af57, type: 2}
+  tileMap: {fileID: 114502229170328284, guid: fab08a7c96b8847ffa8db5eb37f291f1, type: 2}
   levelEntities: []

@@ -6,10 +6,10 @@ using UnityEngine;
 [Serializable]
 public class SpawnEnemyEvent : TimelineEvent{
 
-	public Vector2 tileCoords;
+	public Vector2Int tileCoords;
 	public EnemyCharacter enemy;
 
-	public SpawnEnemyEvent(float time, Vector2 tileCoords, EnemyCharacter enemy, bool delta = false)
+	public SpawnEnemyEvent(float time, Vector2Int tileCoords, EnemyCharacter enemy, bool delta = false)
         : base(time, delta)
     {
 		this.tileCoords = tileCoords;
@@ -18,9 +18,8 @@ public class SpawnEnemyEvent : TimelineEvent{
 
 
 	public override void execute(){
-		Vector3 position = LevelManager.instance().current().tileMap.convertTileCoords(tileCoords);
-        EnemyCharacter e = UnityEngine.Object.Instantiate(enemy, position, new Quaternion());
-        LevelManager.instance().current().addLevelEntity(e.gameObject);
+        EnemyCharacter e = UnityEngine.Object.Instantiate(enemy, Vector3.zero, new Quaternion());
+        LevelManager.instance().current().addLevelEntity(e, tileCoords);
 	}
 
 }

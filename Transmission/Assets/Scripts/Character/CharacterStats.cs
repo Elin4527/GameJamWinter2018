@@ -12,6 +12,14 @@ public class CharacterStats {
     private int power;
     private float speed;
 
+    private float vision;
+
+    public void modifyVision(float change)
+    {
+        vision += change;
+        if (vision < 0) vision = 0;
+    }
+
     public void modifyDefense(int change)
     {
         defense += change;
@@ -64,6 +72,11 @@ public class CharacterStats {
         if (power < 0) power = 0;
     }
 
+    public void setVision(float value)
+    {
+        modifyVision(value - vision);
+    }
+
     public void setMaxHealth(int value)
     {
         modifyMaxHealth(value - maxHealth);
@@ -82,6 +95,11 @@ public class CharacterStats {
     public void setPower(int value)
     {
         modifyPower(value - power);
+    }
+
+    public float getVision()
+    {
+        return vision;
     }
 
     public int getHealth()

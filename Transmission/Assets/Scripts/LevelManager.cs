@@ -12,9 +12,9 @@ public class LevelManager : MonoBehaviour {
 		return inst;
 	}
 
-	public GameObject[] levels;
+	public Level[] levels;
 	public AllyCharacter [] players;
-	private GameObject instantiatedLevel;
+	private Level instantiatedLevel;
     private List<AllyCharacter> instantiatedPlayers;
 
 	private int index = 0;
@@ -42,8 +42,8 @@ public class LevelManager : MonoBehaviour {
 	void buildLevel(int index){
 		instantiatedLevel = Instantiate(levels[index]);
 		instantiatedLevel.transform.parent = transform;
-        instantiatedLevel.GetComponent<Level>().init();
-		instantiatedLevel.GetComponent<Level>().loadPlayers(instantiatedPlayers);
+        instantiatedLevel.init();
+		instantiatedLevel.loadPlayers(instantiatedPlayers);
 	}
 
 	void nextLevel(){
