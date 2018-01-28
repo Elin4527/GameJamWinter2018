@@ -7,9 +7,11 @@ public class Player : MonoBehaviour {
 
 	SpriteRenderer cursor;
 
-	public GameObject inspecting;
 	public Ability[] abilities;
 	public float cameraPanSpeed;
+
+	public GameObject RangeCircle;
+	private GameObject range;
 
 	private int selected = 0;
 
@@ -21,7 +23,27 @@ public class Player : MonoBehaviour {
 	private const float xScreenRatio = (640f / 72f);
 	private const float yScreenRatio = (360f / 72f);
 
+
+	[HideInInspector]
+	public BaseCharacter inspecting = null;
+
+	// singleton stuff
+	private static Player inst = null;
+	public static Player instance(){
+		return inst;
+	}
+
 	void Start () {
+		
+		// singleton stuff
+		if (!inst) {
+			inst = this;
+		} else if (inst != this) {
+			Destroy (gameObject);
+		}
+
+		// set cursor invisible
+		Cursor.visible = false;
 		middle = new Vector2((float)(screenWidth/2),(float) (screenHeight / 2));
 		Camera.main.transform.SetParent(this.transform);
 		/**
@@ -32,14 +54,37 @@ public class Player : MonoBehaviour {
 		cursor = new GameObject("Cursor").AddComponent<SpriteRenderer>();
 		cursor.transform.position = Vector3.zero;
 		cursor.sortingLayerName = "UI";
+		Color c = cursor.color;
+		c.a = 140f / 256f;
+		cursor.color = c;
 
-		//abilities[selected].updateCursorSprite(cursor);
+
+		range = Instantiate(RangeCircle);
+		range.transform.SetParent(cursor.transform);
+
 	}
 
 	void switchToAbility(int index, Vector2 worldCursorPos){
+
+		if(index == selected) return;
+
+		if(selected==0 && index!=0) {
+			Destroy(range);
+		}
+
+		if(selected == 1) {
+			inspecting = null;
+		}
+
 		selected = index;
 		abilities[selected].updateValidity(worldCursorPos);
 		abilities[selected].updateCursorSprite(cursor);
+
+		if(selected == 0) {
+			range = Instantiate(RangeCircle);
+			range.transform.SetParent(cursor.transform, false);
+		}
+
 	}
 
 	void move(Vector2 dir){
@@ -51,12 +96,12 @@ public class Player : MonoBehaviour {
 		return !(mouseVec.x < -1.0f || mouseVec.x > 1.0f || mouseVec.y < -1.0f || mouseVec.y > 1.0f);
 	}
 
-	Vector2 screenToWorld(Vector2 mouseVec){
+	public Vector2 screenToWorld(Vector2 mouseVec){
 		return new Vector2(mouseVec.x * xScreenRatio + transform.position.x, 
 			mouseVec.y * yScreenRatio + transform.position.y);
 	}
 
-	Vector2 getNormalizedMouseCoords(){
+	public Vector2 getNormalizedMouseCoords(){
 		return new Vector2(
            2*(Input.mousePosition.x - middle.x) / (float)screenWidth,
 		   2*(Input.mousePosition.y - middle.y) / (float)screenHeight);
@@ -65,6 +110,7 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+	
 
 		//Debug.Log(Input.mousePosition);
 		// calculate mouse Position as [x,y] => [[-1,1], [-1,1]]
@@ -74,14 +120,18 @@ public class Player : MonoBehaviour {
 			Vector2 mouseWorldPos = screenToWorld(mouseVec);
 			cursor.transform.position = mouseWorldPos;
 
-			// update validity
 			abilities[selected].updateValidity(mouseWorldPos);
 			abilities[selected].updateCursorSprite(cursor);
 
-			// move if necessary
 			if(Mathf.Abs(mouseVec.x) > 0.7f || Mathf.Abs(mouseVec.y) > 0.7f) {
 				move(mouseVec);
+				inspecting = null;
 			}
+
+			if(inspecting) {
+				transform.position = inspecting.transform.position;
+			}
+
 
 			if (Input.GetMouseButtonUp(0)){
 				abilities[selected].use(mouseWorldPos);
@@ -91,9 +141,14 @@ public class Player : MonoBehaviour {
 				switchToAbility(0,mouseWorldPos);
 			}
 
-			//if(Input.GetKeyDown(KeyCode.Alpha2)) {
-			//	switchToAbility(1);
-			//}
+			if(Input.GetKeyDown(KeyCode.Alpha2)) {
+				switchToAbility(1, mouseWorldPos);
+			}
+
+			if(Input.GetKeyDown(KeyCode.Alpha3)) {
+				switchToAbility(2, mouseWorldPos);
+			}
+
 		}
 
 
