@@ -54,6 +54,7 @@ MonoBehaviour:
   count: 0
   cooldown: 3
   delay: 3
+  icon: {fileID: 21300000, guid: 5c4330ec392804ea4a30470473131cb7, type: 3}
   radius: 0.5
   allowed: {fileID: 21300000, guid: 6f9064915e13a45cbbf91c30a1e29f7c, type: 3}
   notAllowed: {fileID: 21300000, guid: 918f617a19b964be3bbdc10bb22efa17, type: 3}

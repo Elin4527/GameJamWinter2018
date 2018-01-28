@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1440486683861632}
+  m_RootGameObject: {fileID: 1067597249300444}
   m_IsPrefabParent: 1
---- !u!1 &1440486683861632
+--- !u!1 &1067597249300444
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4526632835423788}
-  - component: {fileID: 114600691273744864}
+  - component: {fileID: 4868303077431286}
+  - component: {fileID: 114089672502112536}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: Level2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4526632835423788
+--- !u!4 &4868303077431286
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1440486683861632}
+  m_GameObject: {fileID: 1067597249300444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,20 +40,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114600691273744864
+--- !u!114 &114089672502112536
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1440486683861632}
+  m_GameObject: {fileID: 1067597249300444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffbf668cdc4ef465b9ea70c3d455fe9d, type: 3}
+  m_Script: {fileID: 11500000, guid: faf8415a3b54440b980295f9b5e4e853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 0}
-  players:
-  - {fileID: 114006585698114488, guid: e0e197087c1f10e428af905e81688df6, type: 2}
-  - {fileID: 114499379034307076, guid: 494a775ab42c84f86bb5583df709743e, type: 2}
-  - {fileID: 114006585698114488, guid: e0e197087c1f10e428af905e81688df6, type: 2}
+  spawnPoint: {x: 3, y: 3}
+  goalPoint: {x: 56, y: 3}
+  timelineExecutor: {fileID: 114657776498625788, guid: 9f926e1400721498395bec4af7869cfc,
+    type: 2}
+  tileMap: {fileID: 114053610547655634, guid: c157b0b8812344449a05031a8f2ec6b9, type: 2}
+  tileMapRef: {fileID: 0}
+  levelEntities: []

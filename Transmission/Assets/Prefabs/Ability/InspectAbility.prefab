@@ -54,5 +54,7 @@ MonoBehaviour:
   count: 0
   cooldown: 0
   delay: 0
+  icon: {fileID: 21300000, guid: 567d88abf8fd747f7ba05451bc025645, type: 3}
   cursorDefault: {fileID: 21300000, guid: f8c39fefe7e974d3cbc0e7deed4fd823, type: 3}
   cursorAllowed: {fileID: 21300000, guid: 66d226960dd7a4e10acf772305687571, type: 3}
+  c: {r: 1, g: 1, b: 1, a: 0}
