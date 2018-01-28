@@ -15,8 +15,11 @@ public abstract class AIBase {
     public void setCharacter(BaseCharacter c)
     {
         character = c;
+        startUp();
     }
 
+    public virtual void startUp()
+    { }
     public abstract void logicTick();
     public abstract AIBase fixedLogicTick();
     public abstract Vector2 frameInput();

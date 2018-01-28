@@ -7,13 +7,13 @@ public class Player : MonoBehaviour {
 
 	SpriteRenderer cursor;
 
-	private Ability[] abilities;
+	public Ability[] abilities;
 	public float cameraPanSpeed;
 
 	public GameObject RangeCircle;
 	private GameObject range;
 
-	private int selected = 0;
+	public int selected = 0;
 
 	private Vector2 middle;
 		
