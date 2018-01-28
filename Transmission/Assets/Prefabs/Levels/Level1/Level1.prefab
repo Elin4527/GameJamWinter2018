@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1253156347389714}
+  m_RootGameObject: {fileID: 1820590979913868}
   m_IsPrefabParent: 1
---- !u!1 &1253156347389714
+--- !u!1 &1820590979913868
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4389907943770112}
-  - component: {fileID: 114926546845279484}
+  - component: {fileID: 4041494396689142}
+  - component: {fileID: 114334210553802654}
   m_Layer: 0
   m_Name: Level1
   m_TagString: Untagged
@@ -27,12 +27,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4389907943770112
+--- !u!4 &4041494396689142
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1253156347389714}
+  m_GameObject: {fileID: 1820590979913868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,19 +40,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114926546845279484
+--- !u!114 &114334210553802654
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1253156347389714}
+  m_GameObject: {fileID: 1820590979913868}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faf8415a3b54440b980295f9b5e4e853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 4, y: 3}
+  spawnPoint: {x: 5, y: 5}
+  goalPoint: {x: 129, y: 25}
   timelineExecutor: {fileID: 114657776498625788, guid: 9f926e1400721498395bec4af7869cfc,
     type: 2}
-  tileMap: {fileID: 114502229170328284, guid: fab08a7c96b8847ffa8db5eb37f291f1, type: 2}
+  tileMap: {fileID: 114090560322796366, guid: 1e3f042b497414d939f40f22987a25af, type: 2}
+  tileMapRef: {fileID: 0}
   levelEntities: []
