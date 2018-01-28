@@ -8,6 +8,8 @@ public abstract class Ability : MonoBehaviour {
 	public float cooldown;
 	public float delay;
 
+	public Sprite icon;
+
 	private float remainingTime;
 	private bool isAvailable = true;
 	protected bool validity;

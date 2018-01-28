@@ -145,6 +145,10 @@ public class Player : MonoBehaviour {
 				switchToAbility(2, mouseWorldPos);
 			}
 
+			if(Input.GetKeyDown(KeyCode.Alpha4)) {
+				switchToAbility(3, mouseWorldPos);
+			}
+
 		}
 
 
