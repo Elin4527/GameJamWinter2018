@@ -6,26 +6,20 @@ using UnityEngine;
 [Serializable]
 public class SpawnEnemyEvent : TimelineEvent{
 
-	public float despawnTime;
-	public Vector2 tileCoords;
-	public GameObject enemy;
-	public GameObject attack;
+	public Vector2Int tileCoords;
+	public EnemyCharacter enemy;
 
-	public SpawnEnemyEvent(float time, float despawn, Vector2 tileCoords, GameObject enemy, 
-		GameObject attack, bool delta = false) : base(time, delta){
-		this.despawnTime = despawn;
+	public SpawnEnemyEvent(float time, Vector2Int tileCoords, EnemyCharacter enemy, bool delta = false)
+        : base(time, delta)
+    {
 		this.tileCoords = tileCoords;
 		this.enemy = enemy;
-		this.attack = attack;
 	}
 
 
 	public override void execute(){
-		enemy.transform.position = LevelManager.instance().convertTileCoords(tileCoords);
-		// instantiate enemy and getComponent
-		// set despawn time
-		// instantiate attack
-		// set attack as child of the enemy
+        EnemyCharacter e = UnityEngine.Object.Instantiate(enemy, Vector3.zero, new Quaternion());
+        LevelManager.instance().current().addLevelEntity(e, tileCoords);
 	}
 
 }

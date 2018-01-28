@@ -22,17 +22,21 @@ public class TileMapGenerator : MonoBehaviour {
 	public GameObject[] sceneryNonBlocking; //5
 
 	public Vector3 boardTranslate;
-	public const float size = 0.889999f;
+	public const float size = 8.0f/9.0f;
 
 	// Use this for initialization
 	void Start () {
-		map = parseTextMap(textFile.text);
-		buildMap();
+
 	}
 
-	int [] [] parseTextMap(String textMap){
+    public TileMap run()
+    {
+        map = parseTextMap(textFile.text);
+        return buildMap();
+    }
 
-		string[] lines = textMap.Split('\n');
+    int [] [] parseTextMap(String textMap){
+        string[] lines = System.Text.RegularExpressions.Regex.Split(textMap, "\r*\n");
 
         char[][] charMap = new char[lines.Length-1][];
 
@@ -43,16 +47,16 @@ public class TileMapGenerator : MonoBehaviour {
         rows = charMap.Length;
 		columns = charMap[0].Length;
 
-		print(rows);
-		print(columns);
-		/**
-		for(int y = 0; y < charMap.Length; y++) {
-			for(int x = 0; x < charMap[0].Length; x++) {
-				print(charMap[y][x]);
-			}
-			print("\n");
-		}
-		**/
+		//print(rows);
+		//print(columns);
+		
+		//for(int y = 0; y < charMap.Length; y++) {
+		//	for(int x = 0; x < charMap[0].Length; x++) {
+		//		print(charMap[y][x]);
+		//	}
+		//	print("\n");
+		//}
+		
 
         int[][] numMap = new int[rows][];
 
@@ -62,7 +66,7 @@ public class TileMapGenerator : MonoBehaviour {
 
         for (int y=0; y < rows; y++){
         	for (int x=0; x<columns; x++){
-				if (charMap[y][x] !='-'){
+				if (charMap[y][x] != '-' && !char.IsWhiteSpace(charMap[y][x])){
 					numMap[y][x] = int.Parse(charMap[y][x].ToString());
 				}
 				else {
@@ -73,7 +77,7 @@ public class TileMapGenerator : MonoBehaviour {
 		return numMap;
 	}
 
-	private void buildMap(){
+	private TileMap buildMap(){
 		// create & instantiate the tileMap gameObject
 		GameObject tileMap = new GameObject("GeneratedTileMap");
 		tileMap.AddComponent<TileMap>();
@@ -106,7 +110,7 @@ public class TileMapGenerator : MonoBehaviour {
 					break;
 				default:
 					toInstantiate = null;
-					print("no obj at " + y + "," + x);
+					//print("no obj at " + y + "," + x);
 					break;
 				}
 				if(toInstantiate) {
@@ -134,9 +138,10 @@ public class TileMapGenerator : MonoBehaviour {
 			}
 		}
 		TileMap t = tileMap.GetComponent<TileMap>() as TileMap;
-		//t.setTileSize(size);
+		t.setTileSize(size);
 		t.setTiles(tiles);
-		/**/
+        /**/
+        return t;
 	}
 
 	public Vector2 getBoardTranslate(){

@@ -6,15 +6,7 @@ public class EnemyCharacter : BaseCharacter {
 
     protected override void init()
     {
+        startingAI = new EnemyDefaultAI();
         friendly = false;
-    }
-    public override void fixedLogic()
-    {
-        base.fixedLogic();
-        setDirection(getTargetVelocity());
-    }
-    public override Vector2 getMovementInput()
-    {
-        return new Vector2(-0.25f, 0.25f);
     }
 }

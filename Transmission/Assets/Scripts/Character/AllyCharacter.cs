@@ -8,9 +8,5 @@ public class AllyCharacter : BaseCharacter {
         startingAI = new AllyDefaultAI();
         friendly = true;
     }
-    public override void fixedLogic()
-    {
-        base.fixedLogic();
-    }
 
 }

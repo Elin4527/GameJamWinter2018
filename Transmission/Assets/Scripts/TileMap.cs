@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TileMap : MonoBehaviour {
 
-
-
-
 	private float tileSize;
 	private GameObject [,] tiles;
 
@@ -29,7 +26,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 	public float getTileSize(){
-		return TileMapGenerator.size;
+		return tileSize;
 	}
 
 	/**
@@ -40,13 +37,26 @@ public class TileMap : MonoBehaviour {
 	}
 
 	public GameObject getTile(int x, int y){
-		return tiles[y,x];
+        if (y >= 0 && y < getRows() && x >= 0 && x < getCols())
+        {
+            return tiles[y, x];
+        }
+        return null;
 	}
 
-	/**
+    public GameObject getTile(Vector2Int coords)
+    {
+        if (coords.y >= 0 && coords.y < getRows() && coords.x >= 0 && coords.x < getCols())
+        {
+            return tiles[coords.y, coords.x];
+        }
+        return null;
+    }
+
+    /**
 	 * produces tile corresponding to world coordinates
 	 **/
-	public GameObject getTile(Vector2 pos){
+    public GameObject getTile(Vector2 pos){
 		Vector2Int tileCoords = getTileCoords(pos);
 		return getTile(tileCoords.x, tileCoords.y);
 	}
@@ -58,12 +68,24 @@ public class TileMap : MonoBehaviour {
 		pos.x -= transform.position.x;
 		pos.x -= transform.position.x;
 
-		int x = (int)((pos.x + 0.5*getTileSize() / getTileSize()));
-		int y = (int)((-pos.y +0.5*getTileSize()) / getTileSize());
+		int x = (int)(pos.x / getTileSize() + 0.5f);
+		int y = (int)(-pos.y / getTileSize() + 0.5f);
+
+        //Debug.Log(pos + "produced x " + x + " y " + y);
 		return new Vector2Int(x, y);
 	}
-	// Update is called once per frame
-	void Update () {
+
+    public Vector3 convertTileCoords(Vector2 tileCoords)
+    {
+        Vector3 boardTranslate = transform.position;
+
+        Vector3 loc = new Vector3(tileCoords.x * getTileSize() + boardTranslate.x, - tileCoords.y * getTileSize() +  boardTranslate.y);
+
+        return loc;
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

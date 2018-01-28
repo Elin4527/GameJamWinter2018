@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public abstract class BaseCharacter : MonoBehaviour {
+[RequireComponent(typeof(ProjectileSpawner))]
+public abstract class BaseCharacter : MapObject {
 
     public int startingHealth;
     public float startingSpeed;
     public int startingPower;
     public int startingDefense;
     public AIBase startingAI;
-
+    public int startingVisionRange;
+    
     private Vector2 currentVelocity;
     private Vector2 velocityDelta;
     private Vector2 targetVelocity;
     private Vector2 direction;
 
     private Stack<AIBase> ai;
+    private ProjectileSpawner weapon;
 
     protected bool friendly;
 
@@ -27,45 +30,43 @@ public abstract class BaseCharacter : MonoBehaviour {
         characterStats = new CharacterStats();
         ai = new Stack<AIBase>();
         init();
-        initStats(startingHealth, startingSpeed, startingPower, startingDefense);
+        initStats(startingHealth, startingSpeed, startingPower, startingDefense, startingVisionRange);
         if(startingAI != null)
         {
             addAIState(startingAI);
         }
+        weapon = GetComponent<ProjectileSpawner>();
 	}
+
+    public void addSpawnerBehaviour(ProjectileSpawnerBehaviour b)
+    {
+        weapon.addSpawnerBehaviour(b);
+    }
 
     public bool isFriendlyUnit()
     {
         return friendly;
     }
 
-    public void addAIState(AIBase state)
+    private void addAIState(AIBase state)
     {
         state.setCharacter(this);
         ai.Push(state);
     }
 
-    public void swapAIState(AIBase state)
-    {
-        ai.Pop();
-
-        state.setCharacter(this);
-        ai.Push(state);
-    }
-
-    protected void initStats(int health, float speed, int power, int defense)
+    protected void initStats(int health, float speed, int power, int defense, float vision)
     {
         characterStats.setMaxHealth(health);
         characterStats.setHealth(health);
         characterStats.setSpeed(speed);
         characterStats.setPower(power);
         characterStats.setDefense(defense);
+        characterStats.setVision(vision);
     }
 
     public void applyDamage(int damage)
     {
-        characterStats.modifyHealth(-damage);
-        Debug.Log("Health is " + characterStats.getHealth());
+        characterStats.modifyHealth(-damage + characterStats.getDefense());
     }
 
     protected virtual void init()
@@ -168,7 +169,11 @@ public abstract class BaseCharacter : MonoBehaviour {
         }
         if (ai.Count > 0)
         {
-            ai.Peek().fixedLogicTick();
+            AIBase newAI = ai.Peek().fixedLogicTick();
+            if (newAI != null)
+            {
+                addAIState(newAI);
+            }
         }
 
         if (characterStats.getHealth() <= 0)
@@ -176,4 +181,5 @@ public abstract class BaseCharacter : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
 }

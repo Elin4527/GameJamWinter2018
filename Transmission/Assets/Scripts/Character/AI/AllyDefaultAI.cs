@@ -4,28 +4,49 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AllyDefaultAI : AIBase {
-    public BaseCharacter target;
 
     public override Vector2 frameInput()
     {
-        if(target != null)
+        Vector2Int target = LevelManager.instance().current().getGoalPoint();
+        if (target.x >= 0 && target.y >= 0)
         {
-            if (!isPathBlocked(target.transform.position))
-            {
-                return (target.transform.position - character.transform.position).normalized * character.getCharacterStats().getSpeed();
-            }
+            Vector2 dest = character.getTileMap().convertTileCoords(target);
+            return pathTo(dest);
         }
         return Vector2.zero;
     }
 
-    public override void fixedLogicTick()
+    public override AIBase fixedLogicTick()
     {
-        if(target == null)
+        // Search for an enemy
+        float vision = character.getCharacterStats().getVision();
+        Vector2 topLeft = (Vector2)character.transform.position - new Vector2(vision, -vision);
+        Vector2 botRight = (Vector2)character.transform.position + new Vector2(vision, -vision);
+
+        List<EnemyCharacter> eQuery = LevelManager.instance().current().getObjectsInRange<EnemyCharacter>(topLeft, botRight);
+
+        if (eQuery != null)
         {
-            target = UnityEngine.Object.FindObjectOfType<EnemyCharacter>();
+            EnemyCharacter target = null;
+            float closest = vision;
+
+            foreach (EnemyCharacter e in eQuery)
+            {
+                float distance = (e.transform.position - character.transform.position).magnitude;
+                if (distance <= closest)
+                {
+                    target = e;
+                    closest = distance;
+                }
+            }
+
+            if (target != null)
+            {
+                return new AttackingAI(target);
+            }
         }
-        character.setDirection(character.getTargetVelocity());
-        return;
+
+        return null;
     }
 
     public override bool isValid()

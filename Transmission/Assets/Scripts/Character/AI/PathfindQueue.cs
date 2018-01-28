@@ -10,16 +10,32 @@ public class PathfindQueue {
         data = new List<PathfindNode>();
     }
 
+    public int size()
+    {
+        return data.Count;
+    }
+
     public PathfindNode peek()
     {
         return (data.Count > 0) ? data[0] : null;
     }
 
-    public PathfindNode findNode(int x, int y)
+    public PathfindNode pop()
+    {
+        PathfindNode p = null;
+        if(data.Count > 0)
+        {
+            p = data[0];
+            data.Remove(p);
+        }
+        return p;
+    }
+
+    public PathfindNode findNode(Vector2Int pos)
     {
         for(int i = 0; i < data.Count; i++)
         {
-            if(data[i].x == x && data[i].y == y)
+            if(data[i].index == pos)
             {
                 return data[i];
             }
@@ -29,7 +45,14 @@ public class PathfindQueue {
 
     public void insertNode(PathfindNode node)
     {
-        data.Insert(binarySearchEnd(node), node);
+        if (data.Count == 0)
+        {
+            data.Add(node);
+        }
+        else
+        {
+            data.Insert(binarySearchStart(node), node);
+        }
     }
 
     public void removeNode(PathfindNode node)
@@ -52,25 +75,16 @@ public class PathfindQueue {
     private int binarySearchStart(PathfindNode node)
     {
         int min = 0;
-        int max = data.Count - 1;
-        while (min <= max)
+        int max = data.Count;
+        while (min < max)
         {
             int mid = (min + max) / 2;
-            if (node.weight == data[mid].weight)
-            {
-                while (node.weight == data[mid].weight && mid >= data.Count)
-                {
-                    mid--;
-                }
-                return mid + 1;
-            }
-            else if (node.weight < data[mid].weight)
-            {
-                max = mid - 1;
-            }
-            else
+            if (data[mid].weight < node.weight)
             {
                 min = mid + 1;
+            }
+            else {
+                max = mid;
             }
         }
         return min;
@@ -79,21 +93,13 @@ public class PathfindQueue {
     private int binarySearchEnd(PathfindNode node)
     {
         int min = 0;
-        int max = data.Count - 1;
-        while(min <= max)
+        int max = data.Count;
+        while(min < max)
         {
             int mid = (min + max) / 2;
-            if (node.weight == data[mid].weight)
+            if (data[mid].weight > node.weight)
             {
-                while (node.weight == data[mid].weight && mid < data.Count)
-                {
-                    mid++;
-                }
-                return mid;
-            }
-            else if (node.weight < data[mid].weight)
-            {
-                max = mid - 1;
+                max = mid;
             }
             else
             {

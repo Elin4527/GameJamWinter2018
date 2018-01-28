@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4858045100994810}
   - component: {fileID: 212053754969561026}
+  - component: {fileID: 114188139564801648}
   m_Layer: 0
   m_Name: Floor2
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114188139564801648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811297810449080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e00444c13d3241bca71b253a1efd42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212053754969561026
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -72,7 +84,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1560261721
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6606890cf2bf04b8e88c5c5fa238b845, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

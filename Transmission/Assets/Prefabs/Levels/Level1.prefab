@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf8415a3b54440b980295f9b5e4e853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timelineExecutor: {fileID: 1023776173399206, guid: 9f926e1400721498395bec4af7869cfc,
+  spawnPoint: {x: 4, y: 3}
+  timelineExecutor: {fileID: 114657776498625788, guid: 9f926e1400721498395bec4af7869cfc,
     type: 2}
-  tileMap: {fileID: 1930276214285456, guid: d685cf8aebe294f198a717a04709af57, type: 2}
+  tileMap: {fileID: 114502229170328284, guid: fab08a7c96b8847ffa8db5eb37f291f1, type: 2}
+  levelEntities: []

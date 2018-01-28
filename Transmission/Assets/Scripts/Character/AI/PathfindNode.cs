@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PathfindNode {
-    public PathfindNode(int x, int y)
+    public PathfindNode(Vector2Int pos)
     {
-        this.x = x;
-        this.y = y;
+        index = pos;
         parent = null;
         cachedCost = 0;
         weight = 0;
     }
 
-    public int x;
-    public int y;
+    public Vector2Int index;
     public PathfindNode parent;
     public float cachedCost;
     public float weight;
