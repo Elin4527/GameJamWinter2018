@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DropItemAbility : AreaAbility {
 
+    public Item i;
 	public RingLoader r;
 
 	// Use this for initialization
@@ -12,12 +13,12 @@ public class DropItemAbility : AreaAbility {
 	protected override void activateAbility(float delay, Vector2 mouseWorldPos){
 		Instantiate(r).init(radius, delay, mouseWorldPos,c);
 		Debug.Log("Ability 3 activated");
-		/**
+		
 		LevelManager.instance().currentTimeline().addEventToQueue(
-			new SpawnEnemyEvent(delay, 
-				LevelManager.current().tileMapRef.getTileCoords(mouseWorldPos),
+			new ItemSpawnEvent(delay, 
+				LevelManager.instance().current().tileMapRef.getTileCoords(mouseWorldPos), i,
 				true));
-		**/
+		
 	}
 
 	protected override void updateSpecificValidity(Vector2 mouseWorldPos){}
