@@ -77,7 +77,11 @@ public abstract class BaseCharacter : MapObject {
 
     public void applyDamage(int damage)
     {
-        characterStats.modifyHealth(-damage + characterStats.getDefense());
+        int actualDamage = -damage + characterStats.getDefense();
+        if (actualDamage >= 0) actualDamage = -1;
+
+        characterStats.modifyHealth(actualDamage);
+        GraphicsEffectRenderer.instance().createTextEffect(actualDamage.ToString(), 18, 0, Color.red, 1.0f, true, (Vector2)transform.position + new Vector2(0.0f, 1.0f));
     }
 
     protected virtual void init()

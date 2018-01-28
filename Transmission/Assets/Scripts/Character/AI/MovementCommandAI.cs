@@ -24,6 +24,7 @@ public class MovementCommandAI : AIBase {
 
     public override AIBase fixedLogicTick()
     {
+        character.GetComponent<ProjectileSpawner>().setFiring(false);
         return null;
     }
 

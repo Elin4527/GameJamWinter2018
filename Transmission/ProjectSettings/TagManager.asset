@@ -48,6 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: TextEffect
+    uniqueID: 2536219183
+    locked: 0
   - name: UI
     uniqueID: 3884262251
     locked: 0
