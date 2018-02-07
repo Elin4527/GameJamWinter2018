@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf8415a3b54440b980295f9b5e4e853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 3, y: 3}
-  goalPoint: {x: 56, y: 3}
+  spawnPoint: {x: 3, y: 6}
+  goalPoint: {x: 56, y: 10}
   timelineExecutor: {fileID: 114657776498625788, guid: 9f926e1400721498395bec4af7869cfc,
     type: 2}
   tileMap: {fileID: 114053610547655634, guid: c157b0b8812344449a05031a8f2ec6b9, type: 2}

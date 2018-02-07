@@ -10,7 +10,7 @@ public class MoveAbility : AreaAbility {
 	bool activated = false;
 	float delayCountdown;
 	Vector2 pos;
-    float notificationRadius = 4.0f;
+    float notificationRadius = 8.0f;
 
 	// Use this for initialization
 	void Start () {}

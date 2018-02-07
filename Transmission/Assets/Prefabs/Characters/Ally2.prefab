@@ -143,7 +143,7 @@ Animator:
   m_GameObject: {fileID: 1971959414707480}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 875856f5e70a33f478f09a8631dd8e67, type: 2}
+  m_Controller: {fileID: 9100000, guid: d90b11307a08bc046905a12f3bcfee90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 4
-  startingSpeed: 2
+  startingSpeed: 1.2
   startingPower: 2
   startingDefense: 0
   startingVisionRange: 6
@@ -363,7 +363,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1758748113
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224206567950177896

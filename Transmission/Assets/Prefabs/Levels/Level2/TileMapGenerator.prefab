@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c7b778b0a804d02a9369b44dd1879f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textFile: {fileID: 4900000, guid: 3fb8a6908be004cd09724e64bcf92d9d, type: 3}
+  textFile: {fileID: 4900000, guid: 0ec9908383bf842eca16726ab83c565a, type: 3}
   empty: {fileID: 1410541574008018, guid: 380d95185ed29476889c703e584987b1, type: 2}
   floorTiles:
   - {fileID: 1236562605023962, guid: a0c592b00deed4213a69953014f611aa, type: 2}

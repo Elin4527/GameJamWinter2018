@@ -171,9 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38380f6d258349baadd17c44503313d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPanSpeed: 0.08
+  abilities: []
+  cameraPanSpeed: 0.12
   RangeCircle: {fileID: 1401883971477460, guid: 37462b2e54d154a8f8d25a13cec29aae,
     type: 2}
+  selected: 0
   inspecting: {fileID: 0}
 --- !u!114 &114181723192804172
 MonoBehaviour:
@@ -187,8 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  cooldown: 3
-  delay: 3
+  cooldown: 2
+  delay: 2
   icon: {fileID: 21300000, guid: 5c4330ec392804ea4a30470473131cb7, type: 3}
   radius: 0.5
   allowed: {fileID: 21300000, guid: 6f9064915e13a45cbbf91c30a1e29f7c, type: 3}
@@ -207,8 +209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  cooldown: 5
-  delay: 5
+  cooldown: 3
+  delay: 3
   icon: {fileID: 21300032, guid: 7c0f2620857604da38c36bbb5e586a74, type: 3}
   radius: 1.5
   allowed: {fileID: 21300000, guid: 6f9064915e13a45cbbf91c30a1e29f7c, type: 3}
@@ -257,8 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  cooldown: 5
-  delay: 5
+  cooldown: 3
+  delay: 3
   icon: {fileID: 21300000, guid: 13e3b018914f5494c8f0b8263f358656, type: 3}
   radius: 1.5
   allowed: {fileID: 21300000, guid: 6f9064915e13a45cbbf91c30a1e29f7c, type: 3}
