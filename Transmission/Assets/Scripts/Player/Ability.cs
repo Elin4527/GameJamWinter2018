@@ -13,8 +13,6 @@ public abstract class Ability : MonoBehaviour {
 	private float remainingTime;
 	private bool isAvailable = true;
 	protected bool validity;
-
-    public Sprite icon;
 		
 
 	void Start () {}

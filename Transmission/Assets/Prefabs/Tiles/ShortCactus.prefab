@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4237985991579048}
   - component: {fileID: 212419817034183334}
   - component: {fileID: 61536070356034232}
+  - component: {fileID: 114872867503019074}
   m_Layer: 8
   m_Name: ShortCactus
   m_TagString: Wall
@@ -66,6 +67,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.665, y: 0.445}
   m_EdgeRadius: 0
+--- !u!114 &114872867503019074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393972246748510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e00444c13d3241bca71b253a1efd42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212419817034183334
 SpriteRenderer:
   m_ObjectHideFlags: 1

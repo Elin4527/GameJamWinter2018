@@ -6,6 +6,7 @@ using UnityEngine;
 public class AllyDefaultAI : AIBase {
 
     Vector2 dest;
+    bool initialized = false;
 
     public override void startUp()
     {
@@ -20,8 +21,10 @@ public class AllyDefaultAI : AIBase {
             dest = character.getTileMap().convertTileCoords(target);
             return pathTo(dest);
         }
-        else if ((dest - (Vector2)character.transform.position).magnitude < 0.1f)
+        else
+        if ((dest - (Vector2)character.transform.position).magnitude < 0.1f || !initialized)
         {
+            initialized = true;
             bool flag = false;
             while (!flag)
             {
